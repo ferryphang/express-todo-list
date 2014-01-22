@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  ul
+  - todos.forEach(function(todo){
+    li
+      = todo.content + " | "
+      a(href="/edit/" + todo.id) Edit |
+      a(href="/destroy/" + todo.id)  Delete
+  - })
+  form(action='/create', method='post')
+    input(type='text', name='content', autofocus='autofocus')

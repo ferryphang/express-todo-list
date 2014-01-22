@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  ul
+  - todos.forEach(function(todo){
+    li
+      - if( todo.id == current ){
+      form(action='/update/' + todo.id, method='post')
+        input(type='text', name='content', autofocus='autofocus', value= todo.content )
+        input(type='submit' value="Update")
+      - }else{
+      = todo.content
+      a(href="/edit/" + todo.id) Edit |
+      a(href="/destroy/" + todo.id)  Delete
+      - }
+  - })
+  form(action='/create', method='post')
+    input(type='text', name='content')
